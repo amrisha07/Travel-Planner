@@ -1,4 +1,4 @@
-package com.springboot.OnlineShopping.config;
+package com.springboot.OnlineShopping.trip.config;
 
 import com.mongodb.client.MongoClients;
 import org.springframework.context.annotation.Bean;

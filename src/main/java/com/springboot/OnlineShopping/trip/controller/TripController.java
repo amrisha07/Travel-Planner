@@ -1,9 +1,9 @@
-package com.springboot.OnlineShopping.controller;
+package com.springboot.OnlineShopping.trip.controller;
 
-import com.springboot.OnlineShopping.dto.CreateTripRequest;
-import com.springboot.OnlineShopping.model.TripActivity;
-import com.springboot.OnlineShopping.model.TripModel;
-import com.springboot.OnlineShopping.repository.TripRepository;
+import com.springboot.OnlineShopping.trip.dto.CreateTripRequest;
+import com.springboot.OnlineShopping.trip.model.TripActivity;
+import com.springboot.OnlineShopping.trip.model.TripModel;
+import com.springboot.OnlineShopping.trip.repository.TripRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

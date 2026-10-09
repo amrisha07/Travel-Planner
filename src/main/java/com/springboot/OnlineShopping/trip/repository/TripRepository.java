@@ -1,6 +1,6 @@
-package com.springboot.OnlineShopping.repository;
+package com.springboot.OnlineShopping.trip.repository;
 
-import com.springboot.OnlineShopping.model.TripModel;
+import com.springboot.OnlineShopping.trip.model.TripModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
