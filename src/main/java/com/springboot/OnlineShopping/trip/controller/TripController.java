@@ -1,9 +1,11 @@
-package com.springboot.OnlineShopping.controller;
+package com.springboot.OnlineShopping.trip.controller;
 
-import com.springboot.OnlineShopping.dto.CreateTripRequest;
-import com.springboot.OnlineShopping.model.TripActivity;
-import com.springboot.OnlineShopping.model.TripModel;
-import com.springboot.OnlineShopping.repository.TripRepository;
+import com.springboot.OnlineShopping.aws.model.TripCreatedEvent;
+import com.springboot.OnlineShopping.aws.service.EventBridgePublisher;
+import com.springboot.OnlineShopping.trip.dto.CreateTripRequest;
+import com.springboot.OnlineShopping.trip.model.TripActivity;
+import com.springboot.OnlineShopping.trip.model.TripModel;
+import com.springboot.OnlineShopping.trip.repository.TripRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import java.util.UUID;
 public class TripController {
 
     private final TripRepository tripRepository;
+    private final EventBridgePublisher eventPublisher;
 
     // Endpoint to create a trip
 
@@ -46,8 +49,18 @@ public class TripController {
             tripEntity.setActivities(activityEntities);
         }
 
-        // Save entity to MongoDB
+        // 1. Save core relational state inside MongoDB
         TripModel savedTrip = tripRepository.save(tripEntity);
+
+        // 2. Map and dispatch the Event Notification asynchronously
+        TripCreatedEvent event = new TripCreatedEvent(
+                savedTrip.getId(),
+                savedTrip.getTitle(),
+                savedTrip.getDestination(),
+                savedTrip.getStartDate(),
+                savedTrip.getOwnerId()
+        );
+        eventPublisher.publishTripCreatedEvent(event);
 
         return ResponseEntity.ok(savedTrip);
     }

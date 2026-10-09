@@ -1,4 +1,4 @@
-package com.springboot.OnlineShopping.dto;
+package com.springboot.OnlineShopping.trip.dto;
 
 import lombok.Data;
 

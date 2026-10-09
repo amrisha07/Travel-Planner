@@ -9,6 +9,15 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  localstack:
+    # Use the final open-source version tag that bypasses authentication requirements
+    image: localstack/localstack:4.4.0
+    container_name: travel-planner-aws
+    ports:
+      - "4566:4566"
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+
 volumes:
   mongo-data:
     driver: local

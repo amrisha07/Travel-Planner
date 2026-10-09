@@ -1,4 +1,4 @@
-package com.springboot.OnlineShopping.model;
+package com.springboot.OnlineShopping.trip.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
